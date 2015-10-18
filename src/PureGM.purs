@@ -4,6 +4,8 @@ import Prelude
 import Control.Monad.Eff
 import Control.Monad.Aff
 
+-- | TYPES
+
 foreign import data GM :: *
 
 foreign import data GMObject :: *
@@ -16,25 +18,34 @@ type Dimensions = { height :: Int
                   , width  :: Int
                   }
 
+-- | CLI INTERFACES
+
+-- | Interface to GraphicsMagick
 foreign import gm :: GM
 
+-- | Interface to ImageMagick
 foreign import im :: GM
 
-foreign import gmTest :: forall e. GM -> Eff e Unit
 
+-- | INPUT
+
+-- | Creates a GMOject from a file
 foreign import gmFile :: forall eff.
                          GM
                       -> FilePath
                       -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
 
+-- | Sets orientation based on EXIF properties
 foreign import autoOrient :: forall eff.
                              GMObject
                           -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
 
+-- | Flips the image vertically
 foreign import flipImage :: forall eff.
                             GMObject
                          -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
 
+-- | Flips the image horizontally
 foreign import flopImage :: forall eff.
                             GMObject
                          -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
@@ -57,6 +68,9 @@ foreign import resizeHeight :: forall eff.
                                Int
                             -> GMObject
                             -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+
+
+-- | OUTPUT
 
 -- | Write the new image to disk
 foreign import write :: forall eff a b.
