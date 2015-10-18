@@ -23,6 +23,16 @@ exports.gmFile = function(gm) {
   };
 };
 
+exports.gmBuffer = function(gm) {
+  return function(buffer) {
+    return function(name) {
+      return function() {
+        return gm(buffer, name);
+      };
+    };
+  };
+};
+
 exports.autoOrient = function(gobj) {
   return function() {
     return gobj.autoOrient();
@@ -76,6 +86,19 @@ exports.write = function(file) {
           });
         };
       }
+    };
+  };
+};
+
+exports.toBuffer = function(gmobj) {
+  return function(success) {
+    return function(failure) {
+      return function() {
+        gmobj.toBuffer(function(err, buffer){
+          if (err) failure(err)();
+          else     success(buffer)();
+        });
+      };
     };
   };
 };

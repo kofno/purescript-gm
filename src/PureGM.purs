@@ -2,7 +2,9 @@ module PureGM where
 
 import Prelude
 import Control.Monad.Eff
+import Control.Monad.Eff.Exception (Error())
 import Control.Monad.Aff
+import Node.Buffer (Buffer())
 
 -- | TYPES
 
@@ -13,6 +15,7 @@ foreign import data GMObject :: *
 foreign import data GRAPHICS_MAGIC :: !
 
 type FilePath = String
+type FileName = String
 
 type Dimensions = { height :: Int
                   , width  :: Int
@@ -34,6 +37,13 @@ foreign import gmFile :: forall eff.
                          GM
                       -> FilePath
                       -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+
+-- | Creates a GMObject from a Buffer
+foreign import gmBuffer :: forall eff.
+                           GM
+                        -> Buffer
+                        -> FileName
+                        -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
 
 -- | Sets orientation based on EXIF properties
 foreign import autoOrient :: forall eff.
@@ -71,6 +81,17 @@ foreign import resizeHeight :: forall eff.
 
 
 -- | OUTPUT
+
+-- | Write the converted image to a Buffer
+foreign import toBuffer :: forall eff a.
+                           GMObject
+                        -> (Buffer -> Eff eff Unit)
+                        -> (Error -> Eff eff Unit)
+                        -> Eff eff Unit
+
+toBuffer' :: forall eff. GMObject -> Aff eff Buffer
+toBuffer' gmobj = makeAff (\err success -> toBuffer gmobj success err)
+
 
 -- | Write the new image to disk
 foreign import write :: forall eff a b.
