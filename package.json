@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "directories": {
-    "test":  "test"
+    "test":  "test",
     "build": "pulp build -o node_modules"
   },
   "scripts": {
