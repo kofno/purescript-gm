@@ -1,4 +1,4 @@
-module PureGM where
+module Node.GM where
 
 import Prelude
 import Control.Monad.Eff

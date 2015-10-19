@@ -1,6 +1,6 @@
 "use strict";
 
-// module PureGM
+// module Node.GM
 
 var gm = require('gm');
 var im = require('gm').subClass({ imageMagick: true });

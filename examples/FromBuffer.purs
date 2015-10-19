@@ -7,7 +7,7 @@ import Control.Monad.Aff
 import Control.Monad.Aff.Console (print)
 import Node.FS.Sync (readFile)
 
-import PureGM
+import Node.GM
 
 main = launchAff $ do
   buf     <- liftEff $ readFile "examples/anonymous.jpg"

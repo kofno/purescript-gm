@@ -3,6 +3,8 @@ purescript-gm
 
 Purescript bindings to the node gm (GraphicsMagick) module.
 
+
+
 #### TODO
 
 - Complete image manipulators impl

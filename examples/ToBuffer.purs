@@ -7,7 +7,7 @@ import Control.Monad.Aff
 import Control.Monad.Aff.Console (print)
 -- import Control.Monad.Eff.Console (print)
 
-import PureGM
+import Node.GM
 
 main = launchAff $ do
   obj     <- liftEff $ gmFile im "examples/anonymous.jpg"
