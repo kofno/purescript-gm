@@ -102,3 +102,18 @@ exports.toBuffer = function(gmobj) {
     };
   };
 };
+
+exports.toBufferFormat = function(format) {
+  return function(gmobj) {
+    return function(success) {
+      return function(failure) {
+        return function() {
+          gmobj.toBuffer(format, function(err, buffer) {
+            if (err) failure(err)();
+            else     success(buffer)();
+          });
+        };
+      };
+    };
+  };
+};

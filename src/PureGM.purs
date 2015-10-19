@@ -17,6 +17,9 @@ foreign import data GRAPHICS_MAGIC :: !
 type FilePath = String
 type FileName = String
 
+-- | Eventually, I want better type constraints on Format.
+type Format = String
+
 type Dimensions = { height :: Int
                   , width  :: Int
                   }
@@ -83,7 +86,7 @@ foreign import resizeHeight :: forall eff.
 -- | OUTPUT
 
 -- | Write the converted image to a Buffer
-foreign import toBuffer :: forall eff a.
+foreign import toBuffer :: forall eff.
                            GMObject
                         -> (Buffer -> Eff eff Unit)
                         -> (Error -> Eff eff Unit)
@@ -91,6 +94,17 @@ foreign import toBuffer :: forall eff a.
 
 toBuffer' :: forall eff. GMObject -> Aff eff Buffer
 toBuffer' gmobj = makeAff (\err success -> toBuffer gmobj success err)
+
+foreign import toBufferFormat :: forall eff.
+                                 Format
+                              -> GMObject
+                              -> (Buffer -> Eff eff Unit)
+                              -> (Error  -> Eff eff Unit)
+                              -> Eff eff Unit
+
+toBufferFormat' :: forall eff. Format -> GMObject -> Aff eff Buffer
+toBufferFormat' format gmobj =
+  makeAff (\err success -> toBufferFormat format gmobj success err)
 
 
 -- | Write the new image to disk
