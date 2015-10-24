@@ -5,9 +5,10 @@ import Control.Monad.Eff.Class
 import Control.Monad.Eff
 import Control.Monad.Aff
 import Control.Monad.Aff.Console (print)
--- import Control.Monad.Eff.Console (print)
 
 import Node.GM
+import Node.GM.Manipulation
+import Node.GM.Aff
 
 main = launchAff $ do
   obj     <- liftEff $ gmFile im "examples/anonymous.jpg"
@@ -15,7 +16,7 @@ main = launchAff $ do
   flipped <- liftEff $ flipImage orient
   flopped <- liftEff $ flopImage flipped
   resized <- liftEff $ resize { height: 300, width: 600 } flopped
-  e       <- attempt $ toBuffer' resized
+  e       <- attempt $ toBuffer resized
   print $ show e
 
 
