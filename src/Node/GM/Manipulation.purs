@@ -4,6 +4,17 @@ import Control.Monad.Eff
 
 import Node.GM.Types
 
+-- | Join images into a single multi-image file.
+foreign import adjoin :: forall eff.
+                         GMObject
+                      -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+
+-- | Perform an affine transformation on an image
+foreign import affine :: forall eff.
+                         AffineMatrix
+                      -> GMObject
+                      -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+
 -- | Sets orientation based on EXIF properties
 foreign import autoOrient :: forall eff.
                              GMObject
