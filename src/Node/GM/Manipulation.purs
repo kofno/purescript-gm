@@ -1,6 +1,18 @@
-module Node.GM.Manipulation where
+module Node.GM.Manipulation
+  ( adjoin
+  , affine
+  , antialias
+  , append
+  , autoOrient
+  , flipImage
+  , flopImage
+  , resize
+  , resizeWidth
+  , resizeHeight
+  ) where
 
 import Control.Monad.Eff
+import Data.Maybe
 
 import Node.GM.Types
 
@@ -10,10 +22,35 @@ foreign import adjoin :: forall eff.
                       -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
 
 -- | Perform an affine transformation on an image
-foreign import affine :: forall eff.
-                         AffineMatrix
-                      -> GMObject
-                      -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+affine :: forall eff. AffineMatrix
+                   -> GMObject
+                   -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+affine (AffineMatrix s r Nothing) g  = affineImpl (showTransform s r) g
+affine (AffineMatrix s r (Just t)) g = affineImpl (showTranslate s r t) g
+
+foreign import affineImpl :: forall eff. String
+                                      -> GMObject
+                                      -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+
+-- | Antialias is on by default. Pass false to disable.
+foreign import antialias :: forall eff.
+                            Boolean
+                         -> GMObject
+                         -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+
+-- | Appends images to the source image and sets the direction.
+append :: forall eff. Array FilePath
+                   -> Direction
+                   -> GMObject
+                   -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+append fs LeftToRight g = appendImpl fs true g
+append fs TopToBottom g = appendImpl fs false g
+
+foreign import appendImpl :: forall eff.
+                             Array FilePath
+                          -> Boolean
+                          -> GMObject
+                          -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
 
 -- | Sets orientation based on EXIF properties
 foreign import autoOrient :: forall eff.

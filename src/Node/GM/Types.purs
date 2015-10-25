@@ -31,3 +31,12 @@ transformMatrix scale rot = AffineMatrix scale rot Nothing
 
 translateMatrix :: Scale -> Rotation -> Translation -> AffineMatrix
 translateMatrix s r t = AffineMatrix s r (Just t)
+
+showTransform :: Scale -> Rotation -> String
+showTransform s r = show s.x ++ "," ++ show r.x ++ "," ++ show r.y ++ "," ++ show s.y
+
+showTranslate :: Scale -> Rotation -> Translation -> String
+showTranslate s r t = (showTransform s r) ++ "," ++ show t.x ++ "," ++ show t.y
+
+
+data Direction = TopToBottom | LeftToRight
