@@ -9,6 +9,7 @@ module Node.GM.Manipulation
   , backdrop
   , bitdepth
   , blackThreshold
+  , bluePrimary
   , flipImage
   , flopImage
   , resize
@@ -89,6 +90,15 @@ blackThreshold rgba gobj = blackThresholdImpl (showRGBA rgba) gobj
 foreign import blackThresholdImpl :: forall eff. String
                                               -> GMObject
                                               -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+
+-- | blue chromaticity primary point
+bluePrimary :: forall eff. Point -> GMObject -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+bluePrimary p g = bluePrimaryImpl p.x p.y g
+
+foreign import bluePrimaryImpl :: forall eff. Int
+                                           -> Int
+                                           -> GMObject
+                                           -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
 
 -- | Flips the image vertically
 foreign import flipImage :: forall eff.

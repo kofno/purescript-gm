@@ -76,6 +76,16 @@ exports.blackThresholdImpl = function(rgba) {
   };
 };
 
+exports.bluePrimaryImpl = function(x) {
+  return function(y) {
+    return function(gobj) {
+      return function() {
+        return gobj.bluePrimary(x, y);
+      };
+    };
+  };
+};
+
 exports.flipImage = function(gobj) {
   return function() {
     return gobj.flip();

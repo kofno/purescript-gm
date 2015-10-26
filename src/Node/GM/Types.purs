@@ -33,6 +33,7 @@ showRGBA color =
 type Scale = { x :: Int , y :: Int }
 type Rotation = { x :: Int , y :: Int }
 type Translation = { x :: Int , y :: Int }
+type Point = { x :: Int, y :: Int }
 
 data AffineMatrix = AffineMatrix Scale Rotation (Maybe Translation)
 
