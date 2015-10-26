@@ -34,9 +34,37 @@ exports.appendImpl = function(imgs) {
   };
 };
 
+exports.authenticate = function(pw) {
+  return function(gobj) {
+    return function() {
+      return gobj.authenticate(pw);
+    };
+  };
+};
+
 exports.autoOrient = function(gobj) {
   return function() {
     return gobj.autoOrient();
+  };
+};
+
+exports.average = function(gobj) {
+  return function() {
+    return gobj.average();
+  };
+};
+
+exports.backdrop = function(gobj) {
+  return function() {
+    return gobj.backdrop();
+  };
+};
+
+exports.bitdepth = function(depth) {
+  return function(gobj) {
+    return function() {
+      return gobj.bitdepth(depth);
+    };
   };
 };
 

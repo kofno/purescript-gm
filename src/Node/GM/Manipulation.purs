@@ -3,7 +3,11 @@ module Node.GM.Manipulation
   , affine
   , antialias
   , append
+  , authenticate
   , autoOrient
+  , average
+  , backdrop
+  , bitdepth
   , flipImage
   , flopImage
   , resize
@@ -52,10 +56,28 @@ foreign import appendImpl :: forall eff.
                           -> GMObject
                           -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
 
+-- | Decrypt image with a password
+foreign import authenticate :: forall eff. String
+                                        -> GMObject
+                                        -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+
 -- | Sets orientation based on EXIF properties
 foreign import autoOrient :: forall eff.
                              GMObject
                           -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+
+-- | Average a set of images
+foreign import average :: forall eff. GMObject
+                                   -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+
+-- | Display the image centered on a backdrop
+foreign import backdrop :: forall eff. GMObject
+                                    -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+
+-- | The number of bits of color preserved in the image.
+foreign import bitdepth :: forall eff. Int
+                                    -> GMObject
+                                    -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
 
 -- | Flips the image vertically
 foreign import flipImage :: forall eff.
