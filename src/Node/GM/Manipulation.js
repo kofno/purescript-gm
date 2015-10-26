@@ -68,6 +68,14 @@ exports.bitdepth = function(depth) {
   };
 };
 
+exports.blackThresholdImpl = function(rgba) {
+  return function(gobj) {
+    return function() {
+      return gobj.blackThreshold(rgba);
+    };
+  };
+};
+
 exports.flipImage = function(gobj) {
   return function() {
     return gobj.flip();

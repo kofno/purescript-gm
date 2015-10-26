@@ -8,12 +8,15 @@ module Node.GM.Manipulation
   , average
   , backdrop
   , bitdepth
+  , blackThreshold
   , flipImage
   , flopImage
   , resize
   , resizeWidth
   , resizeHeight
   ) where
+
+import Prelude hiding (append)
 
 import Control.Monad.Eff
 import Data.Maybe
@@ -78,6 +81,14 @@ foreign import backdrop :: forall eff. GMObject
 foreign import bitdepth :: forall eff. Int
                                     -> GMObject
                                     -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+
+-- | Changes the black threshold for the image
+blackThreshold :: forall eff. RGBA -> GMObject -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+blackThreshold rgba gobj = blackThresholdImpl (showRGBA rgba) gobj
+
+foreign import blackThresholdImpl :: forall eff. String
+                                              -> GMObject
+                                              -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
 
 -- | Flips the image vertically
 foreign import flipImage :: forall eff.
