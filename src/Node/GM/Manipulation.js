@@ -86,6 +86,16 @@ exports.bluePrimaryImpl = function(x) {
   };
 };
 
+exports.blurImpl = function(r) {
+  return function(s) {
+    return function(gobj) {
+      return function() {
+        return gobj.blur(r, s);
+      };
+    };
+  };
+};
+
 exports.flipImage = function(gobj) {
   return function() {
     return gobj.flip();

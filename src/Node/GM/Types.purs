@@ -51,3 +51,7 @@ showTranslate s r t = (showTransform s r) ++ "," ++ show t.x ++ "," ++ show t.y
 
 
 data Direction = TopToBottom | LeftToRight
+
+type Radius = Number
+type Sigma  = Number
+data Blur   = Blur Radius Sigma

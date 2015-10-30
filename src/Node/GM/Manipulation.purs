@@ -10,6 +10,7 @@ module Node.GM.Manipulation
   , bitdepth
   , blackThreshold
   , bluePrimary
+  , blur
   , flipImage
   , flopImage
   , resize
@@ -99,6 +100,15 @@ foreign import bluePrimaryImpl :: forall eff. Int
                                            -> Int
                                            -> GMObject
                                            -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+
+-- | Blur the image
+blur :: forall eff. Blur -> GMObject -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+blur (Blur r s) g = blurImpl r s g
+
+foreign import blurImpl :: forall eff. Number
+                                    -> Number
+                                    -> GMObject
+                                    -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
 
 -- | Flips the image vertically
 foreign import flipImage :: forall eff.
