@@ -96,6 +96,24 @@ exports.blurImpl = function(r) {
   };
 };
 
+exports.borderImpl = function(w) {
+  return function(h) {
+    return function(gobj) {
+      return function() {
+        return gobj.border(w, h);
+      };
+    };
+  };
+};
+
+exports.borderColorImpl = function(color) {
+  return function(gobj) {
+    return function() {
+      return gobj.borderColor(color);
+    };
+  };
+};
+
 exports.flipImage = function(gobj) {
   return function() {
     return gobj.flip();

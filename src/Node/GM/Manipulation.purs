@@ -11,6 +11,8 @@ module Node.GM.Manipulation
   , blackThreshold
   , bluePrimary
   , blur
+  , border
+  , borderColor
   , flipImage
   , flopImage
   , resize
@@ -110,6 +112,29 @@ foreign import blurImpl :: forall eff. Number
                                     -> Number
                                     -> GMObject
                                     -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+
+-- | Draw a border around the image
+border :: forall eff.
+          Dimensions
+       -> GMObject
+       -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+border d g = borderImpl d.width d.height g
+
+foreign import borderImpl :: forall eff.
+                             Int
+                          -> Int
+                          -> GMObject
+                          -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+
+-- | Change the color of the border
+borderColor :: forall eff. Color -> GMObject -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+borderColor c g = borderColorImpl (toHex c) g
+
+foreign import borderColorImpl :: forall eff.
+                                  String
+                               -> GMObject
+                               -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+
 
 -- | Flips the image vertically
 foreign import flipImage :: forall eff.
