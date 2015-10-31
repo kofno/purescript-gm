@@ -20,20 +20,10 @@ type Dimensions = { height :: Int
                   , width  :: Int
                   }
 
-type RGBA = { red     :: Int
-            , green   :: Int
-            , blue    :: Int
-            , opacity :: Number
-            }
-
-showRGBA :: RGBA -> String
-showRGBA color =
-  (show color.red) ++ "," ++ (show color.blue) ++ "," ++ (show color.green) ++ "," ++ (show color.opacity)
-
-type Scale = { x :: Int , y :: Int }
-type Rotation = { x :: Int , y :: Int }
-type Translation = { x :: Int , y :: Int }
-type Point = { x :: Int, y :: Int }
+type Scale       = { x :: Int, y :: Int }
+type Rotation    = { x :: Int, y :: Int }
+type Translation = { x :: Int, y :: Int }
+type Point       = { x :: Int, y :: Int }
 
 data AffineMatrix = AffineMatrix Scale Rotation (Maybe Translation)
 

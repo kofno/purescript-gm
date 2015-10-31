@@ -24,6 +24,7 @@ import Control.Monad.Eff
 import Data.Maybe
 
 import Node.GM.Types
+import Node.GM.Color
 
 -- | Join images into a single multi-image file.
 foreign import adjoin :: forall eff.
@@ -85,8 +86,8 @@ foreign import bitdepth :: forall eff. Int
                                     -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
 
 -- | Changes the black threshold for the image
-blackThreshold :: forall eff. RGBA -> GMObject -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
-blackThreshold rgba gobj = blackThresholdImpl (showRGBA rgba) gobj
+blackThreshold :: forall eff. Color -> GMObject -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+blackThreshold c gobj = blackThresholdImpl (toHex c) gobj
 
 foreign import blackThresholdImpl :: forall eff. String
                                               -> GMObject
