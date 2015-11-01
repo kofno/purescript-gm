@@ -22,10 +22,10 @@ main = launchAff $ do
   print $ show e
     where
       myDimensions :: Dimensions
-      myDimensions = { height: 188, width: 200 }
+      myDimensions = { height: 5, width: 5 }
 
       myColor :: Color
-      myColor = rgb 127 0 127
+      myColor = rgb 255 0 0
 
 
 

@@ -7,4 +7,3 @@ var toHexImpl = function(n) {
 };
 
 exports.toHexI = toHexImpl;
-exports.toHexN = toHexImpl;
