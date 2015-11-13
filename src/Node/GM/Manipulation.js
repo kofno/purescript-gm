@@ -164,6 +164,26 @@ exports.coalesce = function(gobj) {
   };
 };
 
+exports.colorize = function(r) {
+  return function(g) {
+    return function(b) {
+      return function(gobj) {
+        return function() {
+          return gobj.colorize(r, g, b);
+        };
+      };
+    };
+  };
+};
+
+exports.colorMap = function(type) {
+  return function(gobj) {
+    return function() {
+      return gobj.colorMap(type);
+    };
+  };
+};
+
 exports.flipImage = function(gobj) {
   return function() {
     return gobj.flip();

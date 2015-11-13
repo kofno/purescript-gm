@@ -68,3 +68,7 @@ instance showChannel :: Show Channel where
   show Yellow  = "Yellow"
   show Black   = "Black"
   show Gray    = "Gray"
+
+data ColorMap = SharedColorMap
+              | PrivateColorMap
+

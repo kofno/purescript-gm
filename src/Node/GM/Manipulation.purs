@@ -19,6 +19,8 @@ module Node.GM.Manipulation
   , clip
   , coalesce
   , chop
+  , colorize
+  , colorMap
   , flipImage
   , flopImage
   , resize
@@ -189,6 +191,26 @@ foreign import clip :: forall eff. GMObject -> Eff (gm :: GRAPHICS_MAGIC | eff) 
 
 -- | Merge a sequence of images
 foreign import coalesce :: forall eff. GMObject -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+
+-- | Colorize image
+colorize :: forall eff. Color -> GMObject -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+colorize (RGBA r g b _) gobj = colorizeImpl r g b gobj
+
+foreign import colorizeImpl :: forall eff.
+                               Int
+                            -> Int
+                            -> Int
+                            -> GMObject
+                            -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+
+colorMap :: forall eff. ColorMap -> GMObject -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+colorMap SharedColorMap g  = colorMapImpl "shared" g
+colorMap PrivateColorMap g = colorMapImpl "private" g
+
+foreign import colorMapImpl :: forall eff.
+                               String
+                            -> GMObject
+                            -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
 
 -- | Flips the image vertically
 foreign import flipImage :: forall eff.

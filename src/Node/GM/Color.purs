@@ -3,7 +3,7 @@ module Node.GM.Color
  , rgb
  , toHex
  , toRGBA
- , Color()
+ , Color(RGBA)
  ) where
 
 import Prelude
