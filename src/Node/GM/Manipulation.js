@@ -184,6 +184,14 @@ exports.colorMap = function(type) {
   };
 };
 
+exports.colors = function(int) {
+  return function(gobj) {
+    return function() {
+      return gobj.colors(int);
+    };
+  };
+};
+
 exports.flipImage = function(gobj) {
   return function() {
     return gobj.flip();

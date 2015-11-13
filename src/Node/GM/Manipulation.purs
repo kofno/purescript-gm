@@ -212,6 +212,11 @@ foreign import colorMapImpl :: forall eff.
                             -> GMObject
                             -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
 
+foreign import colors :: forall eff.
+                         Int
+                      -> GMObject
+                      -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+
 -- | Flips the image vertically
 foreign import flipImage :: forall eff.
                             GMObject
