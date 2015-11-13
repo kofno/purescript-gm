@@ -114,6 +114,56 @@ exports.borderColorImpl = function(color) {
   };
 };
 
+exports.boxImpl = function(color) {
+  return function(gobj) {
+    return function() {
+      return gobj.box(color);
+    };
+  };
+};
+
+exports.channelImpl = function(channel) {
+  return function(gobj) {
+    return function() {
+      return gobj.channel(channel);
+    };
+  };
+};
+
+exports.charcoal = function(factor) {
+  return function(gobj) {
+    return function() {
+      return gobj.charcoal(factor);
+    };
+  };
+};
+
+exports.chopImpl = function(w) {
+  return function(h) {
+    return function(x) {
+      return function(y) {
+        return function(gobj) {
+          return function() {
+            return gobj.chop(w, h, x, y);
+          };
+        };
+      };
+    };
+  };
+};
+
+exports.clip = function(gobj) {
+  return function() {
+    return gobj.clip();
+  };
+};
+
+exports.coalesce = function(gobj) {
+  return function() {
+    return gobj.coalesce();
+  };
+};
+
 exports.flipImage = function(gobj) {
   return function() {
     return gobj.flip();

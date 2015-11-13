@@ -13,6 +13,12 @@ module Node.GM.Manipulation
   , blur
   , border
   , borderColor
+  , box
+  , channel
+  , charcoal
+  , clip
+  , coalesce
+  , chop
   , flipImage
   , flopImage
   , resize
@@ -135,6 +141,54 @@ foreign import borderColorImpl :: forall eff.
                                -> GMObject
                                -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
 
+-- | Sets color of the annotation bounding box
+box :: forall eff. Color -> GMObject -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+box c g = boxImpl (toRGBA c) g
+
+foreign import boxImpl :: forall eff.
+                          String
+                       -> GMObject
+                       -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+
+-- | Specifies a channel for other operations
+channel :: forall eff.
+           Channel
+        -> GMObject
+        -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+channel c g = channelImpl (show c) g
+
+foreign import channelImpl :: forall eff.
+                              String
+                           -> GMObject
+                           -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+
+-- | Simoulates an effect like a charcoal drawing. Accepts a factor between 0.0
+-- | and 1.0
+foreign import charcoal :: forall eff. Number
+                                    -> GMObject
+                                    -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+
+
+-- | Removes pixels from the interior of an image
+chop :: forall eff. Dimensions
+                 -> Point
+                 -> GMObject
+                 -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+chop d p g = chopImpl d.width d.height p.x p.y g
+
+foreign import chopImpl :: forall eff.
+                           Int
+                        -> Int
+                        -> Int
+                        -> Int
+                        -> GMObject
+                        -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+
+-- | Apply clipping path
+foreign import clip :: forall eff. GMObject -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+
+-- | Merge a sequence of images
+foreign import coalesce :: forall eff. GMObject -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
 
 -- | Flips the image vertically
 foreign import flipImage :: forall eff.
