@@ -8,14 +8,6 @@ exports.adjoin = function(gobj) {
   };
 };
 
-exports.affineImpl = function(matrix) {
-  return function(gobj) {
-    return function() {
-      return gobj.affine(matrix);
-    };
-  };
-};
-
 exports.antialias = function(bool) {
   return function(gobj) {
     return function() {

@@ -1,6 +1,5 @@
 module Node.GM.Manipulation
   ( adjoin
-  , affine
   , antialias
   , append
   , authenticate
@@ -42,17 +41,6 @@ import Node.GM.Color
 foreign import adjoin :: forall eff.
                          GMObject
                       -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
-
--- | Perform an affine transformation on an image
-affine :: forall eff. AffineMatrix
-                   -> GMObject
-                   -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
-affine (AffineMatrix s r Nothing) g  = affineImpl (showTransform s r) g
-affine (AffineMatrix s r (Just t)) g = affineImpl (showTranslate s r t) g
-
-foreign import affineImpl :: forall eff. String
-                                      -> GMObject
-                                      -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
 
 -- | Antialias is on by default. Pass false to disable.
 foreign import antialias :: forall eff.
