@@ -192,6 +192,22 @@ exports.colors = function(int) {
   };
 };
 
+exports.comment = function(text) {
+  return function(gobj) {
+    return function() {
+      return gobj.comment(text);
+    };
+  };
+};
+
+exports.contrast = function(multiplier) {
+  return function(gobj) {
+    return function() {
+      return gobj.contrast(multiplier);
+    };
+  };
+};
+
 exports.flipImage = function(gobj) {
   return function() {
     return gobj.flip();

@@ -21,6 +21,8 @@ module Node.GM.Manipulation
   , chop
   , colorize
   , colorMap
+  , comment
+  , contrast
   , flipImage
   , flopImage
   , resize
@@ -216,6 +218,12 @@ foreign import colors :: forall eff.
                          Int
                       -> GMObject
                       -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+
+-- | Annotate an image with a comment
+foreign import comment :: forall eff. String -> GMObject -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+
+-- | Increase contrast
+foreign import contrast :: forall eff. Int -> GMObject -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
 
 -- | Flips the image vertically
 foreign import flipImage :: forall eff.
