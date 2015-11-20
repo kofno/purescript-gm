@@ -28,29 +28,4 @@ type Radius = Number
 type Sigma  = Number
 data Blur   = Blur Radius Sigma
 
-data Channel = Red
-             | Green
-             | Blue
-             | Opacity
-             | Matte
-             | Cyan
-             | Magenta
-             | Yellow
-             | Black
-             | Gray
-
-instance showChannel :: Show Channel where
-  show Red     = "Red"
-  show Green   = "Green"
-  show Blue    = "Blue"
-  show Opacity = "Opacity"
-  show Matte   = "Matte"
-  show Cyan    = "Cyan"
-  show Magenta = "Magenta"
-  show Yellow  = "Yellow"
-  show Black   = "Black"
-  show Gray    = "Gray"
-
-data ColorMap = SharedColorMap
-              | PrivateColorMap
 

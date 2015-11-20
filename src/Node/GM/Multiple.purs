@@ -1,6 +1,8 @@
 module Node.GM.Multiple
   ( adjoin
   , append
+  , average
+  , coalesce
   , Direction(..)
   ) where
 
@@ -28,4 +30,11 @@ foreign import appendImpl :: forall eff.
                           -> Boolean
                           -> GMObject
                           -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+
+-- | Average a set of images
+foreign import average :: forall eff. GMObject
+                                   -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
+
+-- | Merge a sequence of images
+foreign import coalesce :: forall eff. GMObject -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
 

@@ -17,3 +17,15 @@ exports.appendImpl = function(imgs) {
     };
   };
 };
+
+exports.average = function(gobj) {
+  return function() {
+    return gobj.average();
+  };
+};
+
+exports.coalesce = function(gobj) {
+  return function() {
+    return gobj.coalesce();
+  };
+};

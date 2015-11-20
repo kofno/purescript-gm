@@ -2,20 +2,13 @@ module Node.GM.Manipulation
   ( antialias
   , authenticate
   , autoOrient
-  , average
   , backdrop
-  , bitdepth
-  , bluePrimary
   , blur
   , border
-  , channel
   , charcoal
   , clip
-  , coalesce
   , chop
-  , colorMap
   , comment
-  , contrast
   , flipImage
   , flopImage
   , resize
@@ -46,27 +39,9 @@ foreign import autoOrient :: forall eff.
                              GMObject
                           -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
 
--- | Average a set of images
-foreign import average :: forall eff. GMObject
-                                   -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
-
 -- | Display the image centered on a backdrop
 foreign import backdrop :: forall eff. GMObject
                                     -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
-
--- | The number of bits of color preserved in the image.
-foreign import bitdepth :: forall eff. Int
-                                    -> GMObject
-                                    -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
-
--- | blue chromaticity primary point
-bluePrimary :: forall eff. Point -> GMObject -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
-bluePrimary p g = bluePrimaryImpl p.x p.y g
-
-foreign import bluePrimaryImpl :: forall eff. Int
-                                           -> Int
-                                           -> GMObject
-                                           -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
 
 -- | Blur the image
 blur :: forall eff. Blur -> GMObject -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
@@ -89,18 +64,6 @@ foreign import borderImpl :: forall eff.
                           -> Int
                           -> GMObject
                           -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
-
--- | Specifies a channel for other operations
-channel :: forall eff.
-           Channel
-        -> GMObject
-        -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
-channel c g = channelImpl (show c) g
-
-foreign import channelImpl :: forall eff.
-                              String
-                           -> GMObject
-                           -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
 
 -- | Simoulates an effect like a charcoal drawing. Accepts a factor between 0.0
 -- | and 1.0
@@ -127,28 +90,8 @@ foreign import chopImpl :: forall eff.
 -- | Apply clipping path
 foreign import clip :: forall eff. GMObject -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
 
--- | Merge a sequence of images
-foreign import coalesce :: forall eff. GMObject -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
-
-colorMap :: forall eff. ColorMap -> GMObject -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
-colorMap SharedColorMap g  = colorMapImpl "shared" g
-colorMap PrivateColorMap g = colorMapImpl "private" g
-
-foreign import colorMapImpl :: forall eff.
-                               String
-                            -> GMObject
-                            -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
-
-foreign import colors :: forall eff.
-                         Int
-                      -> GMObject
-                      -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
-
 -- | Annotate an image with a comment
 foreign import comment :: forall eff. String -> GMObject -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
-
--- | Increase contrast
-foreign import contrast :: forall eff. Int -> GMObject -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
 
 -- | Flips the image vertically
 foreign import flipImage :: forall eff.
