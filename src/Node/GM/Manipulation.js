@@ -2,26 +2,10 @@
 
 // module Node.GM.Manipulation
 
-exports.adjoin = function(gobj) {
-  return function() {
-    return gobj.adjoin();
-  };
-};
-
 exports.antialias = function(bool) {
   return function(gobj) {
     return function() {
       return gobj.antialias(bool);
-    };
-  };
-};
-
-exports.appendImpl = function(imgs) {
-  return function(direction) {
-    return function(gobj) {
-      return function() {
-        return gobj.append(imgs, direction);
-      };
     };
   };
 };
@@ -60,14 +44,6 @@ exports.bitdepth = function(depth) {
   };
 };
 
-exports.blackThresholdImpl = function(rgba) {
-  return function(gobj) {
-    return function() {
-      return gobj.blackThreshold(rgba);
-    };
-  };
-};
-
 exports.bluePrimaryImpl = function(x) {
   return function(y) {
     return function(gobj) {
@@ -98,13 +74,6 @@ exports.borderImpl = function(w) {
   };
 };
 
-exports.borderColorImpl = function(color) {
-  return function(gobj) {
-    return function() {
-      return gobj.borderColor(color);
-    };
-  };
-};
 
 exports.boxImpl = function(color) {
   return function(gobj) {

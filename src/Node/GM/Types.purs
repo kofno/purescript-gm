@@ -24,8 +24,6 @@ type Translation = { x :: Int, y :: Int }
 type Point       = { x :: Int, y :: Int }
 
 
-data Direction = TopToBottom | LeftToRight
-
 type Radius = Number
 type Sigma  = Number
 data Blur   = Blur Radius Sigma

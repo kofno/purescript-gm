@@ -1,24 +1,18 @@
 module Node.GM.Manipulation
-  ( adjoin
-  , antialias
-  , append
+  ( antialias
   , authenticate
   , autoOrient
   , average
   , backdrop
   , bitdepth
-  , blackThreshold
   , bluePrimary
   , blur
   , border
-  , borderColor
-  , box
   , channel
   , charcoal
   , clip
   , coalesce
   , chop
-  , colorize
   , colorMap
   , comment
   , contrast
@@ -35,32 +29,12 @@ import Control.Monad.Eff
 import Data.Maybe
 
 import Node.GM.Types
-import Node.GM.Color
-
--- | Join images into a single multi-image file.
-foreign import adjoin :: forall eff.
-                         GMObject
-                      -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
 
 -- | Antialias is on by default. Pass false to disable.
 foreign import antialias :: forall eff.
                             Boolean
                          -> GMObject
                          -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
-
--- | Appends images to the source image and sets the direction.
-append :: forall eff. Array FilePath
-                   -> Direction
-                   -> GMObject
-                   -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
-append fs LeftToRight g = appendImpl fs true g
-append fs TopToBottom g = appendImpl fs false g
-
-foreign import appendImpl :: forall eff.
-                             Array FilePath
-                          -> Boolean
-                          -> GMObject
-                          -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
 
 -- | Decrypt image with a password
 foreign import authenticate :: forall eff. String
@@ -84,14 +58,6 @@ foreign import backdrop :: forall eff. GMObject
 foreign import bitdepth :: forall eff. Int
                                     -> GMObject
                                     -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
-
--- | Changes the black threshold for the image
-blackThreshold :: forall eff. Color -> GMObject -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
-blackThreshold c gobj = blackThresholdImpl (toHex c) gobj
-
-foreign import blackThresholdImpl :: forall eff. String
-                                              -> GMObject
-                                              -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
 
 -- | blue chromaticity primary point
 bluePrimary :: forall eff. Point -> GMObject -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
@@ -123,24 +89,6 @@ foreign import borderImpl :: forall eff.
                           -> Int
                           -> GMObject
                           -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
-
--- | Change the color of the border
-borderColor :: forall eff. Color -> GMObject -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
-borderColor c g = borderColorImpl (toHex c) g
-
-foreign import borderColorImpl :: forall eff.
-                                  String
-                               -> GMObject
-                               -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
-
--- | Sets color of the annotation bounding box
-box :: forall eff. Color -> GMObject -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
-box c g = boxImpl (toRGBA c) g
-
-foreign import boxImpl :: forall eff.
-                          String
-                       -> GMObject
-                       -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
 
 -- | Specifies a channel for other operations
 channel :: forall eff.
@@ -181,17 +129,6 @@ foreign import clip :: forall eff. GMObject -> Eff (gm :: GRAPHICS_MAGIC | eff) 
 
 -- | Merge a sequence of images
 foreign import coalesce :: forall eff. GMObject -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
-
--- | Colorize image
-colorize :: forall eff. Color -> GMObject -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
-colorize (RGBA r g b _) gobj = colorizeImpl r g b gobj
-
-foreign import colorizeImpl :: forall eff.
-                               Int
-                            -> Int
-                            -> Int
-                            -> GMObject
-                            -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
 
 colorMap :: forall eff. ColorMap -> GMObject -> Eff (gm :: GRAPHICS_MAGIC | eff) GMObject
 colorMap SharedColorMap g  = colorMapImpl "shared" g
