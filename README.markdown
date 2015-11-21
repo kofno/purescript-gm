@@ -1,7 +1,8 @@
 purescript-gm
 -------------
 
-Purescript bindings to the node gm (GraphicsMagick) module.
+Purescript bindings to the node gm (GraphicsMagick) module. I've only partially
+ported the bindings.
 
 #### getting started
 
@@ -32,11 +33,16 @@ $> pulp build examples/ToBuffer.purs
 $> pulp run
 ```
 
+#### module documentation
 
+- [Node.GM](docs/Node/GM.md)
+- [Node.GM.Aff](docs/Node/GM/Aff.md)
+- [Node.GM.Affine](docs/Node/GM/Affine.md)
+- [Node.GM.Color](docs/Node/GM/Color.md)
+- [Node.GM.ColorSpace](docs/Node/GM/ColorSpace.md)
+- [Node.GM.Compose](docs/Node/GM/Compose.md)
+- [Node.GM.Compress](docs/Node/GM/Compress.md)
+- [Node.GM.Manipulation](docs/Node/GM/Manipulation.md)
+- [Node.GM.Multiple](docs/Node/GM/Multiple.md)
+- [Node.GM.Types](docs/Node/GM/Types.md)
 
-#### TODO
-
-- Complete image manipulators impl
-- Start image getter impls
-- Improve type coverage (Format, for example)
-- Complete compatibiiliy \o/
